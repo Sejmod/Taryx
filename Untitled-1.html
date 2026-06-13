@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Мамлекеттик экзамен – тест (Кыргызстан тарыхы)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f0f2f5;
+            font-family: 'Segoe UI', 'Roboto', 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+            padding: 30px 20px;
+            color: #1e2a3a;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0b3b2f, #1b5e3f);
+            padding: 30px 30px 25px;
+            color: white;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.9rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 1rem;
+            opacity: 0.85;
+            margin-top: 6px;
+        }
+
+        .result-panel {
+            background: #fef9e3;
+            border-bottom: 1px solid #e9ecef;
+            padding: 20px 30px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .score-box {
+            background: #2c5f2d;
+            border-radius: 60px;
+            padding: 8px 22px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.4rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .score-box span {
+            font-size: 1.9rem;
+            font-weight: 800;
+        }
+
+        .message-area {
+            font-size: 1rem;
+            color: #2c3e2f;
+            background: #e9f5e9;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: 500;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .btn-check {
+            background: #1e5a3a;
+            color: white;
+        }
+
+        .btn-check:hover {
+            background: #0f3b24;
+            transform: scale(1.02);
+        }
+
+        .btn-reset {
+            background: #f1f3f4;
+            color: #2c3e50;
+        }
+
+        .btn-reset:hover {
+            background: #e2e6ea;
+        }
+
+        .questions-area {
+            padding: 20px 28px 40px;
+            background: #ffffff;
+        }
+
+        .question-card {
+            background: #fafcff;
+            border-radius: 24px;
+            margin-bottom: 28px;
+            padding: 20px 22px;
+            border: 1px solid #e2edf2;
+            transition: all 0.1s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .question-text {
+            font-weight: 700;
+            font-size: 1.1rem;
+            line-height: 1.4;
+            margin-bottom: 16px;
+            color: #0a2f2a;
+            padding-right: 10px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .q-num {
+            background: #d4e6df;
+            border-radius: 40px;
+            padding: 2px 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #154f3a;
+            display: inline-block;
+            margin-right: 12px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-left: 12px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            background: white;
+            padding: 6px 12px;
+            border-radius: 40px;
+            transition: background 0.1s;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            background: #f0f7f4;
+        }
+
+        input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #2a7f4b;
+            cursor: pointer;
+        }
+
+        .option label {
+            font-size: 0.96rem;
+            line-height: 1.4;
+            font-weight: 450;
+            color: #1f2f38;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .warning {
+            background: #fff0e0;
+            border-left: 6px solid #e67e22;
+            padding: 12px 20px;
+            margin-top: 20px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.75rem;
+            padding: 18px;
+            background: #f8fafc;
+            color: #5b6e7c;
+            border-top: 1px solid #e2edf2;
+        }
+
+        @media (max-width: 680px) {
+            body {
+                padding: 15px 10px;
+            }
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            .question-card {
+                padding: 16px;
+            }
+            .options {
+                padding-left: 0;
+            }
+            .result-panel {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>📜 Мамлекеттик экзамен – Тест</h1>
+        <p>Кыргызстан тарыхы | 77 суроо | Ар бир суроодо бир гана туура жооп</p>
+    </div>
+
+    <div class="result-panel" id="resultPanel">
+        <div class="score-box" id="scoreDisplay">
+            📊 Натыйжа: <span id="percentValue">0</span>%
+        </div>
+        <div class="message-area" id="messageArea">
+            ✨ Жоопторду тандап, "Текшерүү" баскычын басыңыз
+        </div>
+        <div class="buttons">
+            <button class="btn-check" id="checkBtn">✅ Текшерүү</button>
+            <button class="btn-reset" id="resetBtn">🔄 Тазалоо</button>
+        </div>
+    </div>
+
+    <div class="questions-area" id="questionsContainer"></div>
+    <footer>
+        Ар бир суроого бир гана жооп туура. Жыйынтык туура жооптордун пайызы көрсөтүлөт.
+    </footer>
+</div>
+
+<script>
+    // --------------------------------------------------------------
+    // ТЕМА: Кыргызстан тарыхы, 77 суроо (туура жооптор текшерүү менен)
+    // --------------------------------------------------------------
+    const questionsData = [
+        { text: "XIX к. аягы — XX к. башында Кыргызстандын аймагында өнөр жайдын кайсы тармагы өнүккөн?", options: ["A) Жеңил өнөр жай", "B) Тоо-кен өнөр жайы жана айыл чарба азыктарын кайра иштетүүчү өнөр жай", "C) Машина куруу", "D) Химия өнөр жайы"], correct: "B" },
+        { text: "Кыргыз элинин тарыхына арналган «Кыргыздар жана алардын этногенетикалык тарыхый-маданий байланыштары» аттуу эмгектин автору ким?", options: ["A) Белек Солтоноев", "B) Осмонаалы Сыдыков", "C) Абрамзон Саул Менделевич", "D) Василий Бартольд"], correct: "C" },
+        { text: "Совет бийлиги орногондон кийин Түндүк Кыргызстанда биринчи чыккан газета кайсы?", options: ["A) Эркин Тоо", "B) Пишпекский листок", "C) Советтик Кыргызстан", "D) Кыргызстан маданияты"], correct: "B" },
+        { text: "Пишпек шаарында жана Пишпек уездинде Совет бийлиги качан орногон?", options: ["A) 1917-ж. 7-ноябрда", "B) 1918-ж. 1-январда", "C) 1919-ж. 1-мартта", "D) 1920-ж. 5-майда"], correct: "B" },
+        { text: "Кыргызстандагы граждандык согуштун өзгөчөлүгү эмнеде болгон?", options: ["A) Чет элдик баскынчылыкта", "B) Деңиз согуштарынын болушунда", "C) Улуттук жана агрардык маселелердин курчтугу, басмачылык кыймылынын кеңири жайылышында", "D) Өнөр жай борборлорунун көптүгүндө"], correct: "C" },
+        { text: "1921–1922-жылдары жер-суу реформасы Кыргызстандын кайсы аймагында жүргүзүлгөн?", options: ["A) Түштүк Кыргызстанда", "B) Баткен аймагында", "C) Түндүк Кыргызстанда (Жети-Суу)", "D) Ош облусунда"], correct: "C" },
+        { text: "«Туран» партиясынын максаты эмнеде болгон?", options: ["A) Россия империясын күчөтүү", "B) Түрк элдерин бириктирип көз карандысыз Түркстан мамлекетин куруу", "C) Советтер Союзун түзүү", "D) Диний мамлекет түзүү"], correct: "B" },
+        { text: "1925-жылы ачылып, 1930-жылдары интеллигенция даярдоодо чоң роль ойногон окуу жай кайсы?", options: ["A) Кыргыз мамлекеттик университети", "B) Кыргыз агартуу институту (Киринпрос)", "C) Педагогикалык академия", "D) Политехникалык институт"], correct: "B" },
+        { text: "1985–1990-жылдары Кыргызстан КП БК биринчи катчысы ким болгон?", options: ["A) Усубалиев Турдакун", "B) Масалиев Абсамат Масалиевич", "C) Акаев Аскар", "D) Бакиев Курманбек"], correct: "B" },
+        { text: "Кыргыз АССР БАК (ЦИК) биринчи төрагасы ким болгон?", options: ["A) Иса Ахунбаев", "B) Абдыкадыр Орозбеков", "C) Жусуп Абдрахманов", "D) Турдакун Усубалиев"], correct: "B" },
+        { text: "«Манас» күмбөзү кайсы кылымга таандык?", options: ["A) XII кылым", "B) XIII кылым", "C) XIV кылым", "D) XV кылым"], correct: "C" },
+        { text: "Кытайда кыргыздар жашаган аймак кайсы?", options: ["A) Тибет", "B) Синьцзян-Уйгур автоном району (Кызыл-Суу)", "C) Манжурия", "D) Гонконг"], correct: "B" },
+        { text: "Жунгар хандыгы качан түзүлгөн?", options: ["A) 1600-жыл", "B) 1635-жыл", "C) 1650-жыл", "D) 1700-жыл"], correct: "B" },
+        { text: "Кыргыз кино искусствосунун алгачкы көркөм фильми кайсы?", options: ["A) «Манас»", "B) «Ак кеме»", "C) «Салтанат»", "D) «Первый учитель»"], correct: "C" },
+        { text: "Моголистан мамлекети качан түзүлгөн?", options: ["A) 1300-жыл", "B) 1347–1348-жылдар", "C) 1400-жыл", "D) 1450-жыл"], correct: "B" },
+        { text: "Кыргызстандан биринчи Советтер Союзунун Баатыры ким болгон?", options: ["A) Чолпонбай Түлөбердиев", "B) Сүймөнкул Чокморов", "C) Токтогул Сатылганов", "D) Исхак Раззаков"], correct: "A" },
+        { text: "«Сарылар» жана «каралар» деп бөлүнгөн түрк уруулары кайсылар?", options: ["A) Кыпчактар", "B) Түргөштөр", "C) Уйгурлар", "D) Огуздар"], correct: "B" },
+        { text: "Кыргызстандын Улуттук Илимдер Академиясы кайсы жылы түзүлгөн?", options: ["A) 1945-жыл", "B) 1954-жыл", "C) 1960-жыл", "D) 1930-жыл"], correct: "B" },
+        { text: "1850-жылдары Нарын өрөөнүндө Кокон хандыгына каршы көтөрүлүштү кимдер жетектеген?", options: ["A) Манасчылар", "B) Тайлак баатырдын уулдары, Төрөгелди баатыр", "C) Бугу уруусу", "D) Саруу уруусу"], correct: "B" },
+        { text: "Санжыра тарыхый булактардын кайсы түрүнө кирет?", options: ["A) Археологиялык", "B) Жазма булак", "C) Оозеки тарыхый булак", "D) Географиялык"], correct: "C" },
+        { text: "Кыргыз Республикасы кайсы жылы БУУга мүчө болгон?", options: ["A) 1991-жыл", "B) 1992-жылдын 2-марты", "C) 1993-жыл", "D) 1990-жыл"], correct: "B" },
+        { text: "Өзгөн архитектуралык комплекси кайсы кылымга таандык?", options: ["A) IX–X кылымдар", "B) XI–XII кылымдар", "C) XIII–XIV кылымдар", "D) XV кылым"], correct: "B" },
+        { text: "Орто Азияда түрк элдеринин эң байыркысы кимдер?", options: ["A) Казактар", "B) Өзбектер", "C) Кыргыздар", "D) Уйгурлар"], correct: "C" },
+        { text: "Кыргызстандын белгилүү сүрөтчүсү жана киноактёру ким болгон?", options: ["A) Сүймөнкул Чокморов", "B) Төлөгөн Касымбеков", "C) Чыңгыз Айтматов", "D) Болот Шамшиев"], correct: "A" },
+        { text: "«Улуу Кыргыз дөөлөтүнүн доору» кайсы кылымдарга туура келет?", options: ["A) VII–VIII кылымдар", "B) VIII–IX кылымдар", "C) IX–X кылымдар", "D) X–XI кылымдар"], correct: "C" },
+        { text: "Кыргызстанда Чыңгыз Айтматов жылы качан жарыяланган?", options: ["A) 2007-жыл", "B) 2008-жыл", "C) 2010-жыл", "D) 2012-жыл"], correct: "B" },
+        { text: "Кокон хандыгы качан түзүлгөн?", options: ["A) 1709-жыл", "B) 1720-жыл", "C) 1750-жыл", "D) 1800-жыл"], correct: "A" },
+        { text: "Ташкентте Совет бийлиги качан орногон?", options: ["A) 1917-жылдын 1-ноябры", "B) 1918-жылдын 5-январы", "C) 1919-жылдын 10-марты", "D) 1920-жылдын 1-апрели"], correct: "A" },
+        { text: "Кенесары хандын кыргыздарга жасаган чабуулу качан болгон?", options: ["A) 1830–1835-жж.", "B) 1841–1843-жж.", "C) 1846–1847-жж.", "D) 1850–1852-жж."], correct: "C" },
+        { text: "1950-жылдары «буржуазиялык улутчул» деп айыпталган кыргыз интеллигенттерин белгилегиле.", options: ["A) Сүймөнкул Чокморов, Айтматов", "B) Касым Тыныстанов, Тазабек Саманчин, Зияш Бектенов", "C) Осмонаалы Сыдыков", "D) Болот Шамшиев"], correct: "B" },
+        { text: "XX кылымдын 50–70-жылдарындагы белгилүү манасчы ким болгон?", options: ["A) Токтогул Сатылганов", "B) Саякбай Каралаев", "C) Барпы Алыкулов", "D) Тоголок Молдо"], correct: "B" },
+        { text: "1970-жылдары дүйнөлүк рынокто эталон болуп эсептелген кен кайсы болгон?", options: ["A) Алтын", "B) Темир", "C) Сымап (Хайдаркан) же сурьма (Кадамжай)", "D) Жез"], correct: "C" },
+        { text: "1990-жылы июнда Кыргызстанда кайсы окуя болгон?", options: ["A) Баткен окуясы", "B) Ош окуясы", "C) Жети-Өгүз окуясы", "D) Талас окуясы"], correct: "B" },
+        { text: "Фрунзе шаарына Бишкек деген тарыхый ат качан кайтарылган?", options: ["A) 1990-жыл", "B) 1991-жылдын 5-февралы", "C) 1992-жыл", "D) 1993-жыл"], correct: "B" },
+        { text: "1992-жылы 25–30-августта кандай окуя болгон?", options: ["A) Конституция кабыл алынган", "B) Биринчи дүйнөлүк кыргыздар курултайы", "C) Парламент шайлоо", "D) БУУга мүчө болуу"], correct: "B" },
+        { text: "«Кыргыз Республикасынын Баатыры» наамына алгач кимдер татыктуу болгон?", options: ["A) Саякбай Каралаев, Чыңгыз Айтматов", "B) Токтогул Сатылганов", "C) Талгат Бегельдинов", "D) Манасчылар гана"], correct: "A" },
+        { text: "Бишкектеги Достук үйү качан ачылган?", options: ["A) 1991-жыл", "B) 1993-жыл", "C) 1994-жыл", "D) 1995-жыл"], correct: "C" },
+        { text: "Россиянын курамына биринчи кирген кыргыз уруусу кайсы?", options: ["A) Саруу", "B) Бугу уруусу", "C) Солто", "D) Кыпчак"], correct: "B" },
+        { text: "Кыргыздар Россия империясына киргенден кийин кайсы генерал-губернаторлукка караган?", options: ["A) Сибирь генерал-губернаторлугу", "B) Кавказ генерал-губернаторлугу", "C) Түркстан генерал-губернаторлугу", "D) Оренбург генерал-губернаторлугу"], correct: "C" },
+        { text: "Сарбагыш уруусунун Черикчи соода миссиясы Кытайга кайсы жылы барган?", options: ["A) 1740-жыл", "B) 1758-жыл", "C) 1765-жыл", "D) 1780-жыл"], correct: "B" },
+        { text: "XVI–XVII кылымдарда кыргыз коомунун саясий-административдик негизин эмне түзгөн?", options: ["A) Вилайеттер", "B) Оң канат, Сол канат жана Ичкилик уруулук бирикмелери", "C) Облустар", "D) Уезддер"], correct: "B" },
+        { text: "Сарыбагыш уруусунун элчилери Петербургга качан барышкан?", options: ["A) 1775-жыл", "B) 1785-жыл", "C) 1790-жыл", "D) 1800-жыл"], correct: "B" },
+        { text: "Кокон хандыгы учурунда кыргыз жерлери кандай административдик түзүлүшкө кирген?", options: ["A) Губернияларга", "B) Бекликтерге (вилайеттерге) жана наибдиктерге", "C) Райондорго", "D) Улуттук округдарга"], correct: "B" },
+        { text: "Кокон хандыгына каршы Алай жана Ош кыргыздарынын көтөрүлүшү кайсы жылдары болгон?", options: ["A) 1860–1865-жж.", "B) 1873–1876-жж.", "C) 1880–1885-жж.", "D) 1890–1895-жж."], correct: "B" },
+        { text: "Россия империясынын колониялык бийлиги орногондон кийин жер кимдин менчиги деп эсептелген?", options: ["A) Жергиликтүү элдин", "B) Бектердин", "C) Россия империясынын мамлекеттик казынасынын", "D) Хандын"], correct: "C" },
+        { text: "Советтер Союзунун Баатыры наамын эки жолу алган жоокер ким?", options: ["A) Чолпонбай Түлөбердиев", "B) Талгат Бегельдинов", "C) Исхак Раззаков", "D) Токтогул Сатылганов"], correct: "B" },
+        { text: "Улуу Ата Мекендик согушта Кыргызстандан канча адам Советтер Союзунун Баатыры наамын алган?", options: ["A) 50", "B) 60", "C) 73", "D) 100"], correct: "C" },
+        { text: "1930-жылдары альтернативдүү өнүгүү жолун издегендер кимдер болгон?", options: ["A) Дыйкандар", "B) Улуттук интеллигенция жана оппозиция өкүлдөрү", "C) Солдаттар", "D) Соодагерлер"], correct: "B" },
+        { text: "Талас өрөөнүндөгү орто кылымдагы шаар кайсы?", options: ["A) Ош", "B) Баласагын", "C) Атлах (Шельджи)", "D) Өзгөн"], correct: "C" },
+        { text: "Уйгур мамлекетин талкалаган күчтүү уруулар кимдер болгон?", options: ["A) Арабдар", "B) Енисей кыргыздары", "C) Кыпчактар", "D) Монголдор"], correct: "B" },
+        { text: "«Отуз киши» катындагы талап аткарылганбы?", options: ["A) Ооба", "B) Жарым-жартылай", "C) Жок, аткарылган эмес", "D) Толугу менен аткарылган"], correct: "C" },
+        { text: "Талас облусу качан түзүлгөн?", options: ["A) 1939-жыл", "B) 1944-жыл", "C) 1950-жыл", "D) 1960-жыл"], correct: "B" },
+        { text: "Кыргыздын туңгуч тарыхчысы ким болгон?", options: ["A) Чыңгыз Айтматов", "B) Осмонаалы Сыдыков", "C) Сүймөнкул Чокморов", "D) Токтогул Сатылганов"], correct: "B" },
+        { text: "Кокон хандыгына каршы алгачкы көтөрүлүш кайсы жерде болгон?", options: ["A) Талас өрөөнүндө", "B) Түндүк Кыргызстанда (Нарын, Чүй аймагы)", "C) Баткенде", "D) Ысык-Көлдө"], correct: "B" },
+        { text: "1873-жылдагы Андижан көтөрүлүшүн ким жетектеген?", options: ["A) Алымбек датка", "B) Исхак Асан уулу (Полот хан)", "C) Курманжан датка", "D) Тайлак баатыр"], correct: "B" },
+        { text: "751-жылы болгон Атлах салгылашуусунда кимдер жеңилген?", options: ["A) Арабдар", "B) Кытай жоокерлери", "C) Кыргыздар", "D) Монголдор"], correct: "B" },
+        { text: "Кыргыз мамлекеттүүлүгүнүн 2200 жылдыгы качан белгиленген?", options: ["A) 2000-жыл", "B) 2001-жыл", "C) 2003-жыл", "D) 2005-жыл"], correct: "C" },
+        { text: "Адамдардын келип чыгышын жана өнүгүшүн изилдөөчү илим кайсы?", options: ["A) Археология", "B) Антропология", "C) География", "D) Этнография"], correct: "B" },
+        { text: "Түндүк Кыргызстан кайсы жылдары Россия империясынын курамына кирген?", options: ["A) 1840–1850-жж.", "B) 1855–1868-жж.", "C) 1870–1880-жж.", "D) 1890–1900-жж."], correct: "B" },
+        { text: "Түштүк Кыргызстандагы жер-суу реформалары кайсы жылдары жүргүзүлгөн?", options: ["A) 1920–1921-жж.", "B) 1925–1926-жж.", "C) 1927–1928-жж.", "D) 1930–1931-жж."], correct: "C" },
+        { text: "Кыргызстандын аймагындагы аскага тартылган белгилүү «аскадагы галерея» кайсы?", options: ["A) Өзгөн жазуулары", "B) Саймалы-Таш", "C) Таш-Рабат", "D) Сулайман-Тоо"], correct: "B" },
+        { text: "Сыма Цянь ким болгон?", options: ["A) Кытай императору", "B) Байыркы кытай тарыхчысы, «Ши цзи» эмгегинин автору", "C) Араб саякатчысы", "D) Монгол ханы"], correct: "B" },
+        { text: "Бишкекте биринчи болуп кайсы чет мамлекет элчилик ачкан?", options: ["A) Россия", "B) Түркия", "C) АКШ", "D) Кытай"], correct: "C" },
+        { text: "Таластагы руникалык жазуу эстеликтери качан табылган?", options: ["A) 1880-жыл", "B) 1896-жыл", "C) 1900-жыл", "D) 1910-жыл"], correct: "B" },
+        { text: "1916-жылдагы көтөрүлүштө Кеминдик кыргыздардын жетекчиси ким болгон?", options: ["A) Мокуш Шабдан уулу", "B) Курманжан датка", "C) Алымбек датка", "D) Саякбай Каралаев"], correct: "A" },
+        { text: "Улуу Ата Мекендик согуштагы эң жогорку наам кайсы?", options: ["A) Эмгек Баатыры", "B) Советтер Союзунун Баатыры", "C) Эл Баатыры", "D) Ардактуу жоокер"], correct: "B" },
+        { text: "Кыргыз ССР Улуттук Илимдер Академиясы кайсы жылы негизделген?", options: ["A) 1943-жыл", "B) 1954-жыл", "C) 1960-жыл", "D) 1970-жыл"], correct: "B" },
+        { text: "Согуш жылдарында Кыргызстанда кайсы өнөр жай тармагы өнүккөн?", options: ["A) Туризм", "B) Машина куруу жана коргонуу өнөр жайы", "C) Айыл чарба гана", "D) Текстиль гана"], correct: "B" },
+        { text: "1938-жылдагы репрессияларга байланышкан окуя кайсы?", options: ["A) Ош окуясы", "B) Чоң-Таш (Ата-Бейит) атылышы", "C) 1916-жыл көтөрүлүшү", "D) 1990-жыл окуясы"], correct: "B" },
+        { text: "Саймалы-Таштагы сүрөттөр кайсы мезгилден башталат?", options: ["A) Темир доору", "B) Неолит", "C) Энеолит жана коло доору", "D) Орто кылым"], correct: "C" },
+        { text: "Маодунь ким болгон?", options: ["A) Кытай императору", "B) Хунну мамлекетинин негиздөөчүсү, шаньюй", "C) Кыргыз ханы", "D) Араб кол башчысы"], correct: "B" },
+        { text: "Караханид мамлекетинин башында ким турган?", options: ["A) Жусуп Баласагын", "B) Сатук Бугра хан", "C) Чыңгыз хан", "D) Тимур"], correct: "B" },
+        { text: "Бухарага жасалган Караханиддердин экинчи жортуулу кайсы жылы болгон?", options: ["A) 990-жыл", "B) 999-жыл", "C) 1005-жыл", "D) 1010-жыл"], correct: "B" },
+        { text: "Кыргыз эли качан калыптанган?", options: ["A) X–XI кылымдар", "B) XIII кылым", "C) XV–XVI кылымдар", "D) XVIII кылым"], correct: "C" },
+        { text: "Чыгыш Түркстандагы көтөрүлүштөрдүн жетекчилери кимдер болгон?", options: ["A) Афак кожонун тукумдары (кожолор)", "B) Монголдор", "C) Кыпчактар", "D) Орус губернаторлору"], correct: "A" },
+        { text: "Кыргыз-казак биргелешкен күрөшү кайсы окуя менен байланышкан?", options: ["A) Орбулак салгылашуусу (1643)", "B) 1916-жыл көтөрүлүшү", "C) Ош окуясы", "D) Атлах согушу"], correct: "A" },
+        { text: "1950–60-жылдардагы белгилүү театр жана кино актеру ким болгон?", options: ["A) Муратбек Рыскулов", "B) Чыңгыз Айтматов", "C) Сүймөнкул Чокморов", "D) Токтогул Сатылганов"], correct: "A" }
+    ];
+
+    // ---------- Рендеринг ----------
+    const container = document.getElementById('questionsContainer');
+    function renderQuestions() {
+        let html = '';
+        questionsData.forEach((q, idx) => {
+            const optHtml = q.options.map(opt => {
+                const optLetter = opt.charAt(0); // 'A', 'B'...
+                return `
+                    <div class="option">
+                        <input type="radio" name="q${idx}" value="${optLetter}" id="q${idx}_${optLetter}">
+                        <label for="q${idx}_${optLetter}">${opt}</label>
+                    </div>
+                `;
+            }).join('');
+            html += `
+                <div class="question-card" data-qidx="${idx}">
+                    <div class="question-text">
+                        <span class="q-num">${idx+1}.</span> 
+                        <span>${q.text}</span>
+                    </div>
+                    <div class="options">
+                        ${optHtml}
+                    </div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+    }
+
+    // Жоопторду чогултуп, пайыз эсептөө
+    function calculateScore() {
+        let answeredAll = true;
+        let correctCount = 0;
+        const total = questionsData.length;
+
+        for (let i = 0; i < total; i++) {
+            const radios = document.querySelectorAll(`input[name="q${i}"]`);
+            let selectedValue = null;
+            for (let r of radios) {
+                if (r.checked) {
+                    selectedValue = r.value;
+                    break;
+                }
+            }
+            if (!selectedValue) {
+                answeredAll = false;
+                continue;
+            }
+            const correctAnswer = questionsData[i].correct;
+            if (selectedValue === correctAnswer) {
+                correctCount++;
+            }
+        }
+
+        if (!answeredAll) {
+            document.getElementById('messageArea').innerHTML = '⚠️ Бардык суроолорго жооп бериңиз! (кээ бир суроого жооп жок)';
+            return null;
+        }
+
+        const percent = Math.round((correctCount / total) * 100);
+        return { percent, correctCount, total };
+    }
+
+    function updateResultUI() {
+        const result = calculateScore();
+        if (result === null) return;
+        const percentSpan = document.getElementById('percentValue');
+        percentSpan.innerText = result.percent;
+        const msgDiv = document.getElementById('messageArea');
+        msgDiv.innerHTML = `🎯 Туура жооптор: ${result.correctCount} / ${result.total}  (${result.percent}%)`;
+        if (result.percent >= 70) {
+            msgDiv.style.background = "#d9f0e1";
+        } else if (result.percent >= 50) {
+            msgDiv.style.background = "#fff1cf";
+        } else {
+            msgDiv.style.background = "#ffe0d9";
+        }
+    }
+
+    function resetAllAnswers() {
+        const allRadios = document.querySelectorAll('input[type="radio"]');
+        allRadios.forEach(radio => radio.checked = false);
+        document.getElementById('percentValue').innerText = "0";
+        document.getElementById('messageArea').innerHTML = '✨ Жоопторду тандап, "Текшерүү" баскычын басыңыз';
+        document.getElementById('messageArea').style.background = "#e9f5e9";
+    }
+
+    // инициализация
+    renderQuestions();
+    document.getElementById('checkBtn').addEventListener('click', updateResultUI);
+    document.getElementById('resetBtn').addEventListener('click', resetAllAnswers);
+</script>
+</body>
+</html>
